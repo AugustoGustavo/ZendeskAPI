@@ -2,10 +2,10 @@ from zenpy import Zenpy
 import tokens
 
 # Create a Zenpy instance
-zenpy_client = Zenpy(domain="zendesk.com",subdomain="logostechnology",email="valter@logostechnology.com.br",token=tokens.__logos_zendesk__)
+zenpy_client = Zenpy(domain="zendesk.com",subdomain=tokens.__logos_subdomain__,email=tokens.__logos_mail__,token=tokens.__logos_zendesk__)
 
 # Get a view content
-content = zenpy_client.views.execute(view="1500024437461")
+content = zenpy_client.views.execute(view=tokens.__view_opentickets__)
 
 # example
 ##content = {"name": 56, "eye_color": "green", "id": "45355", "name": "Nora", "childrens":{"Ch1":"Joao","Ch2":"Maria"}}
