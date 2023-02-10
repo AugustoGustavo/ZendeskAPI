@@ -5,7 +5,7 @@ import tokens
 zenpy_client = Zenpy(domain="zendesk.com",subdomain=tokens.__logos_subdomain__,email=tokens.__logos_mail__,token=tokens.__logos_zendesk__)
 
 # Get a view content
-content = zenpy_client.views.execute(view=tokens.__view_monthtickets__)
+content = zenpy_client.views.execute(view=tokens.__view_quarterlytickets__)
 
 # Perform a simple for
 for i in range(content.count):
@@ -19,5 +19,8 @@ for i in range(content.count):
     print("Data de criação: ", row.created)
     print("Data de atualização: ", row.updated) 
     print("Grupo: ", row.group)
+    print("Analista: ", row.custom_fields[0]["name"])
+    print("Modulo: "), row.custom_fields[1]["name"]
+    print("Id Organização: ", row.organization_id)
     print("\n")
     
