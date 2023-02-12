@@ -19,8 +19,8 @@ for i in range(content.count):
     print("Data de criação: ", row.created)
     print("Data de atualização: ", row.updated) 
     print("Grupo: ", row.group)
-    print("Analista: ", row.custom_fields[0]["name"])
-    print("Modulo: ", row.custom_fields[1]["name"])
+    #print("Analista: ", row.custom_fields[0]["name"])
+    #print("Modulo: ", row.custom_fields[1]["name"])
     print("ID Organização: ", row.organization_id)
     print("\n")
     
