@@ -1,4 +1,3 @@
-from datetime import datetime
 from zenpy import Zenpy
 import tokens
 from dbconn import dbconn
@@ -20,7 +19,8 @@ for i in range(content.count):
 
     agent = ""
     values = " "
-    
+
+    #validate and ajust 
     if len(row.created) == 0:
         data_create = "1999-01-01"
 
@@ -32,8 +32,10 @@ for i in range(content.count):
     if len(row.custom_fields) > 0:
         agent = row.custom_fields[0]["name"]
 
+    #prepare array for the insert parameters
     params = [row.ticket_id , row.subject, row.requester.name, row.priority, "TIMESTAMP '" + row.created[0:10] + "'", row.group, agent, organizationid]
 
+    #make sql insert string
     for position in range(len(params)):
         if (params[position] == 0 and position < 7) or params[position] == "" or params[position] == None:
             params[position] = ""
@@ -51,9 +53,9 @@ for i in range(content.count):
             else:
                 values = values + "'"+params[position] + "'"
 
+    #execute sql command
     sql = "INSERT INTO opentickets VALUES({values})".format(values = values)
     cursor.execute( sql )
-    #cursor.execute("INSERT INTO opentickets VALUES(10500,'assunto teste','Gustavo Jesus','normal',TimeStamp '2023-02-10','','Gustavo Jesus',123456)")
 
 conn.commit()
 cursor.close()
