@@ -12,6 +12,11 @@ cursor = conn.cursor()
 # Get a view content
 content = zenpy_client.views.execute(view=tokens.__view_monthtickets__)
 
+#empty tabele
+sql = "DELETE FROM monthtickets "
+cursor.execute( sql )
+conn.commit()
+
 # Perform a simple for
 for i in range(content.count):
 
