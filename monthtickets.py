@@ -12,7 +12,7 @@ cursor = conn.cursor()
 # Get a view content
 content = zenpy_client.views.execute(view=tokens.__view_monthtickets__)
 
-#empty tabele
+#empty table
 sql = "DELETE FROM monthtickets "
 cursor.execute( sql )
 conn.commit()
@@ -36,10 +36,13 @@ for i in range(content.count):
         organizationid = row.organization_id
 
     if len(row.custom_fields) > 1:
-        agent = row.custom_fields[0]["name"]
-        module = row.custom_fields[1]["name"]
+        if len(row.custom_fields[0]) > 2:
+            agent = row.custom_fields[0]["name"]
+        if len(row.custom_fields[1]) > 2:
+            module = row.custom_fields[1]["name"]
     elif len(row.custom_fields) > 0:
-        agent = row.custom_fields[0]["name"]
+        if len(row.custom_fields[0]) > 2:
+            agent = row.custom_fields[0]["name"]
 
     #prepare array for the insert parameters
     params = [row.ticket_id, 
